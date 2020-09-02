@@ -1,17 +1,16 @@
 {
-  "name": "cesc-cordova-hot-code-push-plugin",
-  "version": "0.0.3",
+  "name": "cordova-cesc-hot-code-push-plugin",
+  "version": "0.0.2",
   "description": "Cordova plugin to perform code updates on the fly",
   "cordova": {
-    "id": "cesc-cordova-hot-code-push-plugin",
+    "id": "cordova-cesc-hot-code-push-plugin",
     "platforms": [
       "android",
       "ios"
     ]
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gzcescit/cordova-hot-code-push"
+    "type": "git"
   },
   "keywords": [
     "cordova",
@@ -38,9 +37,6 @@
     "xml2js": "^0.4"
   },
   "author": "Nikolay Demyankov for Nordnet Bank AB",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/gzcescit/cordova-hot-code-push/issues"
-  },
-  "homepage": "https://github.com/gzcescit/cordova-hot-code-push#readme"
+  "license": "MIT"
+
 }

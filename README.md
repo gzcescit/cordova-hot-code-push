@@ -27,12 +27,12 @@ As a result, your application receives updates of the web content as soon as pos
 This requires cordova 5.0+ (current stable 1.5.3)
 
 ```sh
-cordova plugin add cordova-hot-code-push-plugin
+cordova plugin add cesc-cordova-hot-code-push-plugin
 ```
 
 It is also possible to install via repo url directly (__unstable__)
 ```sh
-cordova plugin add https://github.com/nordnet/cordova-hot-code-push.git
+cordova plugin add https://github.com/gzcescit/cordova-hot-code-push/
 ```
 
 At the end of the installation plugin will recommend you to install [Cordova Hot Code Push CLI client](https://github.com/nordnet/cordova-hot-code-push-cli). This client will help you to:
@@ -58,19 +58,19 @@ In this guide we will show how quickly you can test this plugin and start using 
 2. Add plugin:
 
   ```sh
-  cordova plugin add cordova-hot-code-push-plugin
+  cordova plugin add cesc-cordova-hot-code-push-plugin
   ```
 
 3. Add plugin for local development:
 
   ```sh
-  cordova plugin add cordova-hot-code-push-local-dev-addon
+  cordova plugin add cesc-cordova-hot-code-push-local-dev-addon
   ```
 
 4. Install Cordova Hot Code Push CLI client:
 
   ```sh
-  npm install -g cordova-hot-code-push-cli
+  npm install -g cesc-cordova-hot-code-push-cli
   ```
 
 5. Start local server by executing:

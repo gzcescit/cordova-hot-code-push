@@ -802,6 +802,9 @@ static NSString *const DEFAULT_STARTING_PAGE = @"index.html";
     CDVPluginResult *result = [CDVPluginResult pluginResultWithActionName:nil data:data error:nil];
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
+- (void)jsGetProgressData:(CDVInvokedUrlCommand *)command {
+
+}
 
 - (void)sendPluginNotReadyToWorkMessageForEvent:(NSString *)eventName callbackID:(NSString *)callbackID {
     NSError *error = [NSError errorWithCode:kHCPAssetsNotYetInstalledErrorCode

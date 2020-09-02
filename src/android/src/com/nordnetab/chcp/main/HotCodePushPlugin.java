@@ -20,6 +20,7 @@ import com.nordnetab.chcp.main.events.UpdateDownloadErrorEvent;
 import com.nordnetab.chcp.main.events.UpdateInstallationErrorEvent;
 import com.nordnetab.chcp.main.events.UpdateInstalledEvent;
 import com.nordnetab.chcp.main.events.UpdateIsReadyToInstallEvent;
+import com.nordnetab.chcp.main.events.StartDownloadEvent;
 import com.nordnetab.chcp.main.js.JSAction;
 import com.nordnetab.chcp.main.js.PluginResultHelper;
 import com.nordnetab.chcp.main.model.ChcpError;
@@ -37,6 +38,7 @@ import com.nordnetab.chcp.main.utils.CleanUpHelper;
 import com.nordnetab.chcp.main.utils.Paths;
 import com.nordnetab.chcp.main.utils.VersionHelper;
 import com.nordnetab.chcp.main.view.AppUpdateRequestDialog;
+import com.nordnetab.chcp.main.network.FileDownloader;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.ConfigXmlParser;
@@ -254,6 +256,8 @@ public class HotCodePushPlugin extends CordovaPlugin {
             jsIsUpdateAvailableForInstallation(callbackContext);
         } else if (JSAction.GET_VERSION_INFO.equals(action)) {
             jsGetVersionInfo(callbackContext);
+        } else if (JSAction.GET_PROGRESS_DATA.equals(action)) {
+            jsGetProgressData(callbackContext);
         } else {
             cmdProcessed = false;
         }
@@ -337,7 +341,6 @@ public class HotCodePushPlugin extends CordovaPlugin {
             sendPluginNotReadyToWork(UpdateDownloadErrorEvent.EVENT_NAME, callback);
             return;
         }
-
         FetchUpdateOptions fetchOptions = null;
         try {
             fetchOptions = new FetchUpdateOptions(args.optJSONObject(0));
@@ -461,6 +464,17 @@ public class HotCodePushPlugin extends CordovaPlugin {
         data.put("appVersion", VersionHelper.applicationVersionName(context));
         data.put("buildVersion", VersionHelper.applicationVersionCode(context));
 
+        final PluginResult pluginResult = PluginResultHelper.createPluginResult(null, data, null);
+        callback.sendPluginResult(pluginResult);
+    }
+
+
+    private void jsGetProgressData(final CallbackContext callback) {
+        long TotalBytes = FileDownloader.getTotalBytes();
+        long HasDownBytes = FileDownloader.getHasDownBytes();
+        final Map<String, Object> data = new HashMap<String, Object>();
+        data.put("TotalBytes", TotalBytes);
+        data.put("HasDownBytes", HasDownBytes);
         final PluginResult pluginResult = PluginResultHelper.createPluginResult(null, data, null);
         callback.sendPluginResult(pluginResult);
     }
@@ -758,6 +772,31 @@ public class HotCodePushPlugin extends CordovaPlugin {
     @Subscribe
     public void onEvent(NothingToUpdateEvent event) {
         Log.d("CHCP", "Nothing to update");
+
+        PluginResult jsResult = PluginResultHelper.pluginResultFromEvent(event);
+
+        //notify JS
+        if (downloadJsCallback != null) {
+            downloadJsCallback.sendPluginResult(jsResult);
+            downloadJsCallback = null;
+        }
+
+        sendMessageToDefaultCallback(jsResult);
+    }
+
+    /**
+     * Listener for event that there is no update available at the moment.
+     * We are as fresh as possible.
+     *
+     * @param event event information
+     * @see EventBus
+     * @see NothingToUpdateEvent
+     * @see UpdatesLoader
+     */
+    @SuppressWarnings("unused")
+    @Subscribe
+    public void onEvent(StartDownloadEvent event) {
+        Log.d("CHCP", "StartDownloadEvent");
 
         PluginResult jsResult = PluginResultHelper.pluginResultFromEvent(event);
 

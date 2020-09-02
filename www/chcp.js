@@ -14,7 +14,8 @@ var exec = require('cordova/exec'),
     CONFIGURE: 'jsConfigure',
     REQUEST_APP_UPDATE: 'jsRequestAppUpdate',
     IS_UPDATE_AVAILABLE_FOR_INSTALLATION: 'jsIsUpdateAvailableForInstallation',
-    GET_INFO: 'jsGetVersionInfo'
+    GET_INFO: 'jsGetVersionInfo',
+    GET_PROGRESS_DATA: 'jsGetProgressData',
   };
 
 // Called when Cordova is ready for work.
@@ -182,6 +183,7 @@ var chcp = {
     BEFORE_UPDATE_INSTALLATION: 'chcp_beforeInstall',
     UPDATE_INSTALLATION_FAILED: 'chcp_updateInstallFailed',
     UPDATE_INSTALLED: 'chcp_updateInstalled',
+    START_DOWNLOAD: 'chcp_startDownload',
     NOTHING_TO_INSTALL: 'chcp_nothingToInstall'
   },
 
@@ -274,7 +276,14 @@ var chcp = {
    */
   getVersionInfo: function(callback) {
     callNativeMethod(pluginNativeMethod.GET_INFO, null, callback);
-  }
+  },
+
+  /**
+   *
+   */
+  getProgressData: function(callback) {
+    callNativeMethod(pluginNativeMethod.GET_PROGRESS_DATA, null, callback);
+  },
 };
 
 module.exports = chcp;

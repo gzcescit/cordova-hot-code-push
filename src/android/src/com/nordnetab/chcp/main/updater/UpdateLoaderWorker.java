@@ -8,6 +8,7 @@ import com.nordnetab.chcp.main.config.ContentConfig;
 import com.nordnetab.chcp.main.config.ContentManifest;
 import com.nordnetab.chcp.main.events.NothingToUpdateEvent;
 import com.nordnetab.chcp.main.events.UpdateDownloadErrorEvent;
+import com.nordnetab.chcp.main.events.StartDownloadEvent;
 import com.nordnetab.chcp.main.events.UpdateIsReadyToInstallEvent;
 import com.nordnetab.chcp.main.events.WorkerEvent;
 import com.nordnetab.chcp.main.model.ChcpError;
@@ -26,6 +27,7 @@ import com.nordnetab.chcp.main.utils.URLUtility;
 
 import java.util.List;
 import java.util.Map;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Nikolay Demyankov on 28.07.15.
@@ -219,6 +221,7 @@ class UpdateLoaderWorker implements WorkerTask {
         final List<ManifestFile> downloadFiles = diff.getUpdateFiles();
         boolean isFinishedWithSuccess = true;
         try {
+            EventBus.getDefault().post(new StartDownloadEvent(null));
             FileDownloader.downloadFiles(filesStructure.getDownloadFolder(), contentUrl, downloadFiles, requestHeaders);
         } catch (Exception e) {
             e.printStackTrace();

@@ -72,5 +72,6 @@
  *  @param command command with which the method is called
  */
 - (void)jsGetVersionInfo:(CDVInvokedUrlCommand *)command;
+- (void)jsGetProgressData:(CDVInvokedUrlCommand *)command;
 
 @end

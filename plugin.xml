@@ -151,6 +151,7 @@
     <source-file src="src/android/src/com/nordnetab/chcp/main/events/NothingToInstallEvent.java" target-dir="src/com/nordnetab/chcp/main/events"/>
     <source-file src="src/android/src/com/nordnetab/chcp/main/events/NothingToUpdateEvent.java" target-dir="src/com/nordnetab/chcp/main/events"/>
     <source-file src="src/android/src/com/nordnetab/chcp/main/events/PluginEventImpl.java" target-dir="src/com/nordnetab/chcp/main/events"/>
+    <source-file src="src/android/src/com/nordnetab/chcp/main/events/StartDownloadEvent.java" target-dir="src/com/nordnetab/chcp/main/events"/>
     <source-file src="src/android/src/com/nordnetab/chcp/main/events/UpdateDownloadErrorEvent.java" target-dir="src/com/nordnetab/chcp/main/events"/>
     <source-file src="src/android/src/com/nordnetab/chcp/main/events/UpdateInstallationErrorEvent.java" target-dir="src/com/nordnetab/chcp/main/events"/>
     <source-file src="src/android/src/com/nordnetab/chcp/main/events/UpdateInstalledEvent.java" target-dir="src/com/nordnetab/chcp/main/events"/>
